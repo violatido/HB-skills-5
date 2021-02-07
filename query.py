@@ -9,10 +9,13 @@ from model import db, Human, Animal
 
 def get_human_2():
     """Return the human with the id 2."""
+    return Human.query.filter(Human.human_id==2).one()
+
 
 
 def get_first_fish():
     """Return the FIRST animal with the species 'fish'."""
+    return Animal.query.filter(Animal.animal_species=="fish").first()
 
 
 def get_young_animals():
@@ -21,18 +24,26 @@ def get_young_animals():
     Do NOT include animals without birth years.
     """
 
+    return Animal.query.filter(Animal.birth_year > 2015, Animal.birth_year != None).all()
+
 
 def get_j_names():
     """Return the humans with first names that start with 'J'."""
+
+    return Human.query.filter(Human.fname.like('%J%')).all()
+ 
 
 
 def get_null_bdays():
     """Return all animals whose birth years are NULL."""
 
+    return Animal.query.filter(Animal.birth_year == None).all()
+
 
 def get_fish_or_rabbits():
     """Return all animals whose species is 'fish' OR 'rabbit'."""
 
+    return Animal.query.filter(db.or_(Animal.animal_species == "fish", Animal.animal_species == "rabbit")).all()
 
 def print_directory():
     """Output a list of humans and their animals.
@@ -40,16 +51,16 @@ def print_directory():
     For example:
 
     >>> print_directory()
-    Justin Time
-    - Peter (rabbit)
-    - Peppa (pig)
-    Carmen Sandiego
-    - Blub (fish)
+        Justin Time
+        - Peter (rabbit)
+        - Peppa (pig)
+        Carmen Sandiego
+        - Blub (fish)
 
     You may only use ONE query to retrieve initial data. (Hint: leverage a
     SQLAlchemy relationship to retrieve additional information)
     """
-
+    return Animal.query.all()
 
 def find_humans_by_animal_species(species):
     """Return a list of all humans who have animals of the given species.
