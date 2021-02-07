@@ -7,7 +7,7 @@ $('#id-button').on('click', () => {
         email = $('#email').val()
     }
 
-    $.get('/api/human/<int:human_id>'), (humanData) => {
-        $('human-id').html(humanData);
-    }
+    $.get('/api/human/<int:human_id>', humanData, (response) => {
+        $('#human-id').html(response);
+    })
 });

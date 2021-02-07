@@ -60,7 +60,10 @@ def print_directory():
     You may only use ONE query to retrieve initial data. (Hint: leverage a
     SQLAlchemy relationship to retrieve additional information)
     """
-    return Animal.query.all()
+    animal_list = Animal.query.options(db.joinedload('human')).all()
+
+    return 
+
 
 def find_humans_by_animal_species(species):
     """Return a list of all humans who have animals of the given species.
@@ -73,6 +76,7 @@ def find_humans_by_animal_species(species):
     relationship! Also, you can pursue uniqueness in a Pythonic way --- you
     don't have to do it with pure SQLAlchemy)
     """
+
 
 
 if __name__ == '__main__':
